@@ -1,0 +1,7 @@
+.projectionPane {
+    -fx-border-radius: 10px;
+    -fx-border-color: black;
+    -fx-border-width: 1.0px;
+    -fx-background-color: grey;
+    -fx-background-radius: 10px;
+}

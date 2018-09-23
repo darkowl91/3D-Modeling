@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.paint.Color?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="543.0000999999975"
+            xmlns="http://javafx.com/javafx/2.2" fx:controller="MainController">
+    <children>
+        <MenuBar prefHeight="24.0" prefWidth="712.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="0.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#appExit" text="Close"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <ToolBar prefHeight="32.0" prefWidth="711.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="24.0">
+            <items>
+                <ToggleButton fx:id="uiGridVisible" mnemonicParsing="false" onAction="#setGridVisible" selected="true"
+                              text="Grid lines"/>
+                <ToggleButton fx:id="uiAxisVisible" mnemonicParsing="false" onAction="#setAxisVisible" selected="true"
+                              text="Axis"/>
+                <ToggleButton fx:id="uiAxisTextVisible" mnemonicParsing="false" onAction="#setAxisTextVisible"
+                              selected="true" text="Axis text" visible="true"/>
+            </items>
+        </ToolBar>
+        <ToolBar minHeight="-1.0" prefHeight="31.99999988079071" prefWidth="712.0" AnchorPane.bottomAnchor="-5.0"
+                 AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <items>
+                <ToggleButton fx:id="uiFullScreen" mnemonicParsing="false" onAction="#setFullScreen"
+                              text="Full screen view"/>
+            </items>
+        </ToolBar>
+        <TabPane prefHeight="462.0000999999975" prefWidth="295.0" side="LEFT" tabClosingPolicy="UNAVAILABLE"
+                 AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="417.0"
+                 AnchorPane.topAnchor="56.0">
+            <tabs>
+                <Tab closable="false" text="View">
+                    <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                    styleClass="root">
+                            <children>
+                                <AnchorPane id="Content" maxWidth="-1.0" minHeight="0.0" minWidth="0.0"
+                                            prefHeight="463.0" prefWidth="264.0" AnchorPane.bottomAnchor="0.0"
+                                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                            AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <GridPane gridLinesVisible="false" layoutX="15.0" layoutY="0.0"
+                                                  prefHeight="215.50006103515625" prefWidth="234.0">
+                                            <children>
+                                                <Label text="Shape border color:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="0"/>
+                                                <Label text="Border width:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="1"/>
+                                                <ColorPicker fx:id="uiShapeColor" onAction="#changeShapeColor"
+                                                             prefWidth="134.0" promptText="" GridPane.columnIndex="1"
+                                                             GridPane.rowIndex="0">
+                                                    <value>
+                                                        <Color blue="0.000" green="0.000" red="0.000"/>
+                                                    </value>
+                                                </ColorPicker>
+                                                <Label text="Grid step:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="2"/>
+                                                <ComboBox fx:id="uiGridStep" onAction="#changeGridStep"
+                                                          prefHeight="21.0" prefWidth="134.0"
+                                                          promptText="select grid step" GridPane.columnIndex="1"
+                                                          GridPane.rowIndex="2">
+                                                    <items>
+                                                        <FXCollections fx:factory="observableArrayList">
+                                                            <Integer fx:value="10"/>
+                                                            <Integer fx:value="20"/>
+                                                            <Integer fx:value="30"/>
+                                                            <Integer fx:value="40"/>
+                                                            <Integer fx:value="50"/>
+                                                        </FXCollections>
+                                                    </items>
+                                                    <value>
+                                                        <Integer fx:value="10"/>
+                                                    </value>
+                                                </ComboBox>
+                                                <Label text="Axis text step:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="3"/>
+                                                <ComboBox id="uiGridStep" fx:id="uiAxisTextTick"
+                                                          onAction="#changeAxisTextTick" prefHeight="21.0"
+                                                          prefWidth="134.0" promptText="10" GridPane.columnIndex="1"
+                                                          GridPane.rowIndex="3">
+                                                    <items>
+                                                        <FXCollections fx:factory="observableArrayList">
+                                                            <Integer fx:value="1"/>
+                                                            <Integer fx:value="2"/>
+                                                            <Integer fx:value="3"/>
+                                                            <Integer fx:value="4"/>
+                                                            <Integer fx:value="5"/>
+                                                            <Integer fx:value="6"/>
+                                                            <Integer fx:value="7"/>
+                                                            <Integer fx:value="8"/>
+                                                            <Integer fx:value="9"/>
+                                                            <Integer fx:value="10"/>
+                                                        </FXCollections>
+                                                    </items>
+                                                    <value>
+                                                        <Integer fx:value="5"/>
+                                                    </value>
+                                                </ComboBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Slider fx:id="uiShapeBorderWidth" blockIncrement="0.5"
+                                                                majorTickUnit="1.0" max="5.0" min="1.0"
+                                                                minorTickCount="1"
+                                                                onMouseDragged="#changeShapeBorderWidth"
+                                                                showTickLabels="true" showTickMarks="true"
+                                                                snapToTicks="true" value="1.0"/>
+                                                    </children>
+                                                </HBox>
+                                                <Label text="Shape transperent:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="4"/>
+                                                <CheckBox fx:id="uiIsTransparent" mnemonicParsing="false"
+                                                          onAction="#changeTransparent" selected="true" text=""
+                                                          GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                                                <Label text="Shape fill color:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="5"/>
+                                                <ColorPicker fx:id="uiFillColor" disable="true"
+                                                             onAction="#changeFillColor" prefWidth="114.0"
+                                                             GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                    <value>
+                                                        <Color blue="0.663" green="0.663" red="0.663"/>
+                                                    </value>
+                                                </ColorPicker>
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="-1.0" prefWidth="-1.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                        </GridPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                            <stylesheets>
+                                <URL value="@../css/TabPane.css"/>
+                            </stylesheets>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Opetations">
+                    <content>
+                        <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0"
+                                    styleClass="root">
+                            <children>
+                                <AnchorPane id="Content" layoutX="0.0" layoutY="-1.0" minHeight="0.0" minWidth="0.0"
+                                            prefHeight="463.0000999999975" prefWidth="264.0">
+                                    <children>
+                                        <GridPane prefHeight="451.0" prefWidth="250.0" AnchorPane.leftAnchor="14.0"
+                                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+                                            <children>
+                                                <Label text="Rotate X:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <VBox id="VBox" alignment="CENTER" spacing="5.0">
+                                                            <children>
+                                                                <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                                                                    <children>
+                                                                        <Slider fx:id="uiRotateX" blockIncrement="0.1"
+                                                                                majorTickUnit="25.0" max="360.0"
+                                                                                onMouseDragged="#changeShapeRotate"
+                                                                                prefHeight="30.0" prefWidth="200.0"
+                                                                                showTickLabels="true"
+                                                                                showTickMarks="true"
+                                                                                snapToTicks="true"/>
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <Label text="Rotate Y:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                                                <Label text="Rotate Z:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <VBox id="VBox" alignment="CENTER" spacing="5.0">
+                                                            <children>
+                                                                <HBox id="HBox" alignment="CENTER" spacing="5.0">
+                                                                    <children>
+                                                                        <Slider fx:id="uiRotateY" blockIncrement="10.0"
+                                                                                max="360.0"
+                                                                                onMouseDragged="#changeShapeRotate"
+                                                                                prefWidth="200.0" showTickLabels="true"
+                                                                                showTickMarks="true"
+                                                                                snapToTicks="true"/>
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <VBox id="VBox" alignment="CENTER" spacing="5.0">
+                                                            <children>
+                                                                <HBox id="HBox" alignment="CENTER" prefHeight="24.0"
+                                                                      prefWidth="200.0" spacing="5.0">
+                                                                    <children>
+                                                                        <Slider fx:id="uiRotateZ" blockIncrement="10.0"
+                                                                                max="360.0"
+                                                                                onMouseDragged="#changeShapeRotate"
+                                                                                prefHeight="24.0" prefWidth="195.0"
+                                                                                showTickLabels="true"
+                                                                                showTickMarks="true"
+                                                                                snapToTicks="true"/>
+                                                                    </children>
+                                                                </HBox>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <Label text="Translate X:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="4"/>
+                                                <Label text="Translate Y:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="5"/>
+                                                <Label text="Translate Z:" GridPane.columnIndex="0"
+                                                       GridPane.rowIndex="6"/>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                    <children>
+                                                        <TextField fx:id="uiTranslateX" maxWidth="-Infinity"
+                                                                   onAction="#changeShapeTranslate" prefWidth="124.0"
+                                                                   text="0"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                    <children>
+                                                        <TextField fx:id="uiTranslateY" maxWidth="-Infinity"
+                                                                   onAction="#changeShapeTranslate" prefWidth="124.0"
+                                                                   text="0"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                    <children>
+                                                        <TextField fx:id="uiTranslateZ" onAction="#changeShapeTranslate"
+                                                                   prefWidth="124.0" text="0"/>
+                                                    </children>
+                                                </HBox>
+                                                <Label text="Scale X:" GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+                                                <Label text="Scale Y:" GridPane.columnIndex="0" GridPane.rowIndex="9"/>
+                                                <Label text="Scale Z:" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                    <children>
+                                                        <TextField fx:id="uiScaleX" onAction="#changeShapeScale"
+                                                                   prefWidth="124.0" text="1"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                    <children>
+                                                        <TextField fx:id="uiScaleY" onAction="#changeShapeScale"
+                                                                   prefWidth="124.0" text="1"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                    <children>
+                                                        <TextField fx:id="uiScaleZ" onAction="#changeShapeScale"
+                                                                   prefWidth="124.0" text="1"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <TextField fx:id="uiCurrentAngelX" onAction="#changeShapeRotate"
+                                                                   prefWidth="200.0" text="0"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <TextField id="uiCurrentAngelX" fx:id="uiCurrentAngelY"
+                                                                   onAction="#changeShapeRotate" prefWidth="200.0"
+                                                                   text="0"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <TextField fx:id="uiCurrentAngelZ" onAction="#changeShapeRotate"
+                                                                   prefWidth="200.0" text="0"/>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="81.0" prefWidth="64.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0"
+                                                                   prefWidth="147.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0"
+                                                                   prefWidth="39.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="46.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="26.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="24.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                        </GridPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                            <stylesheets>
+                                <URL value="@../css/TabPane.css"/>
+                            </stylesheets>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="uiTabProjectionOption" closable="false" onSelectionChanged="#changeViewProjectionTab"
+                     text="Projections">
+                    <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="463.0" prefWidth="405.0"
+                                    styleClass="root">
+                            <children>
+                                <AnchorPane id="Content" layoutX="0.0" layoutY="1.0" minHeight="0.0" minWidth="0.0"
+                                            prefHeight="463.0" prefWidth="264.0">
+                                    <children>
+                                        <GridPane fx:id="qqqqqqqqqqqqqqqqqqq" gridLinesVisible="false" hgap="0.0"
+                                                  prefHeight="289.5" prefWidth="264.0" visible="true"
+                                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                                  AnchorPane.topAnchor="161.0">
+                                            <children>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <Label text="Type:"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" prefWidth="203.0" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                    <children>
+                                                        <ComboBox fx:id="uiProjectionType"
+                                                                  onAction="#changeProjectionType" prefHeight="21.0"
+                                                                  prefWidth="188.0" value="Rectangular">
+                                                            <items>
+                                                                <FXCollections fx:factory="observableArrayList">
+                                                                    <String fx:value="Rectangular" fx:id="1"/>
+                                                                    <String fx:value="Axonometric" fx:id="2"/>
+                                                                    <String fx:value="Oblique" fx:id="3"/>
+                                                                    <String fx:value="Perspective" fx:id="4"/>
+                                                                </FXCollections>
+                                                            </items>
+                                                        </ComboBox>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <Label text="Plane:"/>
+                                                    </children>
+                                                </HBox>
+                                                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                    <children>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                            <children>
+                                                                <RadioButton fx:id="uiPlaneXY" mnemonicParsing="false"
+                                                                             onAction="#setRectangleProjection"
+                                                                             selected="true" text="XY">
+                                                                    <toggleGroup>
+                                                                        <ToggleGroup fx:id="uiPlaneToggleGroup"/>
+                                                                    </toggleGroup>
+                                                                </RadioButton>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                                            <children>
+                                                                <RadioButton fx:id="uiPlaneYZ" mnemonicParsing="false"
+                                                                             onAction="#setRectangleProjection"
+                                                                             text="YZ"
+                                                                             toggleGroup="$uiPlaneToggleGroup"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                                            <children>
+                                                                <RadioButton fx:id="uiPlaneXZ" mnemonicParsing="false"
+                                                                             onAction="#setRectangleProjection"
+                                                                             text="XZ" toggleGroup="$uiPlaneToggleGroup"
+                                                                             underline="false"/>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                           prefWidth="100.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                           prefWidth="100.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+                                                                           prefWidth="100.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                </GridPane>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Label disable="false" text="Angle:"/>
+                                                    </children>
+                                                </HBox>
+                                                <GridPane prefHeight="-1.0" GridPane.columnIndex="1"
+                                                          GridPane.rowIndex="2">
+                                                    <children>
+                                                        <Slider id="uiRotateY" fx:id="uiAngleFi" blockIncrement="1.0"
+                                                                disable="true" max="360.0"
+                                                                onMouseDragged="#changeAxonometryProjection"
+                                                                prefWidth="200.0" showTickLabels="true"
+                                                                showTickMarks="true" GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="0"/>
+                                                        <Slider id="uiRotateY" fx:id="uiAnglePsi" blockIncrement="1.0"
+                                                                disable="true" max="360.0"
+                                                                onMouseDragged="#changeAxonometryProjection"
+                                                                prefWidth="200.0" showTickLabels="true"
+                                                                showTickMarks="true" GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="1"/>
+                                                        <Label disable="false" text="FI" GridPane.columnIndex="0"
+                                                               GridPane.rowIndex="0"/>
+                                                        <Label disable="false" text="PSI" GridPane.columnIndex="0"
+                                                               GridPane.rowIndex="1"/>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                                            <children>
+                                                                <TextField fx:id="uiCurrentAngleFi" disable="true"
+                                                                           onAction="#changeAxonometryProjection"
+                                                                           prefWidth="200.0" text="0"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                            <children>
+                                                                <TextField fx:id="uiCurrentAnglePsi" disable="true"
+                                                                           onAction="#changeAxonometryProjection"
+                                                                           prefWidth="200.0" text="0"/>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="103.0"
+                                                                           minWidth="10.0" prefWidth="18.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0"
+                                                                           minWidth="10.0" prefWidth="142.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0"
+                                                                           minWidth="10.0" prefWidth="30.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                </GridPane>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="0" GridPane.rowIndex="3">
+                                                    <children>
+                                                        <Label disable="false" text="Distance:"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="0" GridPane.rowIndex="5">
+                                                    <children>
+                                                        <Label disable="false" text="Angle:"/>
+                                                    </children>
+                                                </HBox>
+                                                <GridPane id="GridPane" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                    <children>
+                                                        <TextField id="uiLengthOfSingleObject" fx:id="uiDistanceD"
+                                                                   disable="true"
+                                                                   onAction="#changePerspectiveProjection"
+                                                                   prefWidth="150.0" text="0" GridPane.columnIndex="1"
+                                                                   GridPane.rowIndex="0"/>
+                                                        <TextField fx:id="uiDistanceRo" disable="true"
+                                                                   onAction="#changePerspectiveProjection"
+                                                                   prefWidth="200.0" text="0" GridPane.columnIndex="3"
+                                                                   GridPane.rowIndex="0"/>
+                                                        <Label text="D:" GridPane.columnIndex="0"
+                                                               GridPane.rowIndex="0"/>
+                                                        <Label text="Ro:" GridPane.columnIndex="2"
+                                                               GridPane.rowIndex="0"/>
+                                                    </children>
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="37.0"
+                                                                           minWidth="10.0" prefWidth="14.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="74.0"
+                                                                           minWidth="10.0" prefWidth="74.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="36.0"
+                                                                           minWidth="10.0" prefWidth="20.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="110.0"
+                                                                           minWidth="10.0" prefWidth="83.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                </GridPane>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                    <children>
+                                                        <GridPane prefHeight="45.0" prefWidth="203.0">
+                                                            <children>
+                                                                <Slider id="uiRotateY" fx:id="uiAngleAlpha"
+                                                                        blockIncrement="1.0" disable="true" max="360.0"
+                                                                        onMouseDragged="#changeScaleneProjection"
+                                                                        prefHeight="33.0" prefWidth="138.0"
+                                                                        showTickLabels="true" showTickMarks="true"
+                                                                        GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                                                                <HBox id="HBox" alignment="CENTER" disable="true"
+                                                                      spacing="5.0" GridPane.columnIndex="2"
+                                                                      GridPane.rowIndex="0"/>
+                                                                <TextField fx:id="uiCurrentAngleAlpha" disable="true"
+                                                                           onAction="#changeScaleneProjection"
+                                                                           prefWidth="200.0" text="0"
+                                                                           GridPane.columnIndex="2"
+                                                                           GridPane.rowIndex="0"/>
+                                                            </children>
+                                                            <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0"
+                                                                                   minWidth="10.0" prefWidth="28.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="186.0"
+                                                                                   minWidth="10.0" prefWidth="145.0"/>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="105.0"
+                                                                                   minWidth="10.0" prefWidth="38.0"/>
+                                                            </columnConstraints>
+                                                            <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                                vgrow="SOMETIMES"/>
+                                                            </rowConstraints>
+                                                        </GridPane>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="0" GridPane.rowIndex="6">
+                                                    <children>
+                                                        <Label disable="false" prefHeight="32.0"
+                                                               text="Distance&#10;to plane"/>
+                                                    </children>
+                                                </HBox>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                    <children>
+                                                        <TextField fx:id="uiDistanceToPlane" disable="true"
+                                                                   onAction="#changeScaleneProjection" prefWidth="150.0"
+                                                                   text="1"/>
+                                                    </children>
+                                                </HBox>
+                                                <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                    <children>
+                                                        <Slider id="uiRotateY" fx:id="uiAnglePerspectiveTheta"
+                                                                blockIncrement="1.0" disable="true" max="360.0"
+                                                                onMouseDragged="#changePerspectiveProjection"
+                                                                prefWidth="200.0" showTickLabels="true"
+                                                                showTickMarks="true" GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="0"/>
+                                                        <Slider id="uiRotateY" fx:id="uiAnglePerspectiveFi"
+                                                                blockIncrement="1.0" disable="true" max="360.0"
+                                                                onMouseDragged="#changePerspectiveProjection"
+                                                                prefWidth="200.0" showTickLabels="true"
+                                                                showTickMarks="true" GridPane.columnIndex="1"
+                                                                GridPane.rowIndex="1"/>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                                            <children>
+                                                                <Label text="Theta"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                                            <children>
+                                                                <Label text="Fi"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                                            <children>
+                                                                <TextField id="uiCurrentAngleFi"
+                                                                           fx:id="uiCurrentAnglePerspectiveTheta"
+                                                                           disable="true"
+                                                                           onAction="#changePerspectiveProjection"
+                                                                           prefWidth="200.0" text="0"/>
+                                                            </children>
+                                                        </HBox>
+                                                        <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                              GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                                            <children>
+                                                                <TextField id="uiCurrentAngleFi"
+                                                                           fx:id="uiCurrentAnglePerspectiveFi"
+                                                                           disable="true"
+                                                                           onAction="#changePerspectiveProjection"
+                                                                           prefWidth="200.0" text="0"/>
+                                                            </children>
+                                                        </HBox>
+                                                    </children>
+                                                    <columnConstraints>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="62.0"
+                                                                           minWidth="10.0" prefWidth="29.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0"
+                                                                           minWidth="10.0" prefWidth="143.0"/>
+                                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="64.0"
+                                                                           minWidth="10.0" prefWidth="39.0"/>
+                                                    </columnConstraints>
+                                                    <rowConstraints>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                        <RowConstraints minHeight="10.0" prefHeight="30.0"
+                                                                        vgrow="SOMETIMES"/>
+                                                    </rowConstraints>
+                                                </GridPane>
+                                                <HBox id="HBox" alignment="CENTER" spacing="5.0"
+                                                      GridPane.columnIndex="0" GridPane.rowIndex="4">
+                                                    <children>
+                                                        <Label text="Angle:"/>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0"
+                                                                   prefWidth="53.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="231.0" minWidth="10.0"
+                                                                   prefWidth="211.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints maxHeight="44.0" minHeight="10.0" prefHeight="27.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="77.0" minHeight="10.0" prefHeight="17.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="144.0" minHeight="10.0" prefHeight="71.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="104.0" minHeight="1.0" prefHeight="21.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="104.0" minHeight="1.0" prefHeight="76.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="104.0" minHeight="1.0" prefHeight="32.0"
+                                                                vgrow="SOMETIMES"/>
+                                                <RowConstraints maxHeight="112.0" minHeight="1.0" prefHeight="31.0"
+                                                                vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                        </GridPane>
+                                        <ImageView fx:id="uiModelSnapshot" fitHeight="138.5"
+                                                   fitWidth="184.6666760907125" pickOnBounds="true" preserveRatio="true"
+                                                   AnchorPane.leftAnchor="41.0" AnchorPane.rightAnchor="38.33"
+                                                   AnchorPane.topAnchor="22.0">
+                                            <effect>
+                                                <DropShadow blurType="GAUSSIAN" height="31.119045206478653"
+                                                            radius="15.059523206381565" spread="0.2777777777777778"
+                                                            width="31.119047619047606"/>
+                                            </effect>
+                                        </ImageView>
+                                        <Label layoutX="8.0" layoutY="3.0" text="Current model state"/>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                            <stylesheets>
+                                <URL value="@../css/TabPane.css"/>
+                            </stylesheets>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Light">
+                    <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                    styleClass="root">
+                            <children>
+                                <GridPane layoutX="26.0" layoutY="172.0" prefHeight="80.0" prefWidth="212.0">
+                                    <children>
+                                        <Label text="Light point:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                                        <GridPane prefWidth="111.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                            <children>
+                                                <TextField fx:id="uiLightX" onAction="#changeLightPoint"
+                                                           prefWidth="200.0" text="0" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="0"/>
+                                                <TextField fx:id="uiLightY" onAction="#changeLightPoint"
+                                                           prefWidth="200.0" text="0" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="1"/>
+                                                <TextField fx:id="uiLightZ" onAction="#changeLightPoint"
+                                                           prefWidth="200.0" text="300" GridPane.columnIndex="1"
+                                                           GridPane.rowIndex="2"/>
+                                                <Label text="X:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                                                <Label text="Y:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                                                <Label text="Z:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                                            </children>
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0"
+                                                                   prefWidth="22.0"/>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0"
+                                                                   prefWidth="89.0"/>
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                            </rowConstraints>
+                                        </GridPane>
+                                    </children>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="106.0" minWidth="10.0"
+                                                           prefWidth="72.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="140.0" minWidth="10.0"
+                                                           prefWidth="140.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                </GridPane>
+                                <ImageView fx:id="uiLight" blendMode="MULTIPLY" fitHeight="150.0" fitWidth="150.0"
+                                           layoutX="57.0" mouseTransparent="false" onMouseClicked="#changeLightOnOff"
+                                           pickOnBounds="true" preserveRatio="true" smooth="true"
+                                           AnchorPane.topAnchor="14.0">
+                                    <image>
+                                        <Image url="@../images/light-off.png"/>
+                                    </image>
+                                </ImageView>
+                                <Label text="*Note: Shape could not be tranprent." textFill="#ff6433"
+                                       AnchorPane.bottomAnchor="19.0" AnchorPane.leftAnchor="8.0"/>
+                            </children>
+                            <stylesheets>
+                                <URL value="@../css/TabPane.css"/>
+                            </stylesheets>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <TabPane prefHeight="463.0" prefWidth="417.0" side="RIGHT" tabClosingPolicy="UNAVAILABLE"
+                 AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="295.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="55.0">
+            <tabs>
+                <Tab fx:id="uiTabView" text="Model View">
+                    <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                    styleClass="root">
+                            <children>
+                                <ScrollPane id="pane" fitToHeight="true" fitToWidth="true" prefHeight="464.0"
+                                            prefWidth="379.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                            AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
+                                    <content>
+                                        <AnchorPane id="Content" fx:id="pane" cache="true" cacheHint="QUALITY"
+                                                    depthTest="ENABLE" minHeight="-1.0" minWidth="-1.0"
+                                                    onMouseClicked="#changeLightPoint" prefHeight="463.0"
+                                                    prefWidth="377.0" styleClass="rootDrawingArea">
+                                            <children>
+                                                <TextArea fx:id="uiDebugInfo" depthTest="ENABLE" editable="false"
+                                                          opacity="1.0" prefHeight="298.0" prefWidth="358.0"
+                                                          styleClass="debugPane" visible="false" wrapText="true"
+                                                          AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="11.0"
+                                                          AnchorPane.rightAnchor="8.0">
+                                                    <stylesheets>
+                                                        <URL value="@../css/debugPane.css"/>
+                                                    </stylesheets>
+                                                </TextArea>
+                                            </children>
+                                            <stylesheets>
+                                                <URL value="@../css/drawingArea.css"/>
+                                            </stylesheets>
+                                        </AnchorPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                            <stylesheets>
+                                <URL value="@../css/TabPane.css"/>
+                            </stylesheets>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="uiTabProjection" text="Model  Projection">
+                    <content>
+                        <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"
+                                    styleClass="root">
+                            <children>
+                                <ScrollPane id="pane" fitToHeight="true" fitToWidth="true" prefHeight="464.0"
+                                            prefWidth="379.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                            AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
+                                    <content>
+                                        <AnchorPane id="Content" fx:id="uiProjectionPane" cache="false"
+                                                    cacheHint="DEFAULT" depthTest="DISABLE" minHeight="-1.0"
+                                                    minWidth="-1.0" prefHeight="462.0" prefWidth="379.0"
+                                                    styleClass="rootDrawingArea">
+                                            <stylesheets>
+                                                <URL value="@../css/drawingArea.css"/>
+                                            </stylesheets>
+                                        </AnchorPane>
+                                    </content>
+                                </ScrollPane>
+                            </children>
+                            <stylesheets>
+                                <URL value="@../css/TabPane.css"/>
+                            </stylesheets>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
